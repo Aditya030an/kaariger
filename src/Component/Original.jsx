@@ -1,0 +1,147 @@
+
+
+
+import React from "react";
+import { motion } from "framer-motion";
+import VanillaTilt from "vanilla-tilt";
+import bgImg from "./photos/slide3.jpeg";
+import kaarigar1 from "./photos/best1.jpeg";
+import kaarigar2 from "./photos/best2.jpeg";
+import kaarigar3 from "./photos/best3.jpeg";
+import Img4 from "./photos/best4.jpeg";
+import Img5 from "./photos/best5.jpeg";
+import Img6 from "./photos/best6.jpeg";
+import Img7 from "./photos/best7.jpeg";
+import Img8 from "./photos/best8.png";
+import Img9 from "./photos/best9.png";
+
+
+// TiltCard
+function TiltCard({ children }) {
+  const tiltRef = React.useRef(null);
+
+
+  React.useEffect(() => {
+    if (tiltRef.current) {
+      VanillaTilt.init(tiltRef.current, {
+        max: 25,
+        speed: 400,
+        glare: true,
+        "max-glare": 0.4,
+        perspective: 1000,
+      });
+    }
+  }, []);
+
+
+  return (
+    <div ref={tiltRef} className="will-change-transform">
+      {children}
+    </div>
+  );
+}
+
+
+
+// Products
+const originals = [
+  { id: 1, title: "Handcrafted Dreams | Original Artwork", price: "₹ 7999", image: kaarigar1, link: "#" },
+  { id: 2, title: "Soulful Symphony | Canvas Masterpiece", price: "₹ 6499", image: kaarigar2, link: "#" },
+  { id: 3, title: "Mystic Reflections | Paper Original", price: "₹ 7299", image: kaarigar3, link: "#" },
+  { id: 4, title: "Handcrafted Dreams | Original Artwork", price: "₹ 7999", image: Img4, link: "#" },
+  { id: 5, title: "Soulful Symphony | Canvas Masterpiece", price: "₹ 6499", image: Img5, link: "#" },
+  { id: 6, title: "Mystic Reflections | Paper Original", price: "₹ 7299", image: Img6, link: "#" },
+  { id: 7, title: "Handcrafted Dreams | Original Artwork", price: "₹ 7999", image: Img7, link: "#" },
+  { id: 8, title: "Soulful Symphony | Canvas Masterpiece", price: "₹ 6499", image: Img8, link: "#" },
+  { id: 9, title: "Mystic Reflections | Paper Original", price: "₹ 7299", image: Img9, link: "#" },
+];
+
+const fadeInUp = {
+  hidden: { opacity: 0, y: 60 },
+  show: { opacity: 1, y: 0, transition: { duration: 0.8, ease: "easeOut" } },
+};
+
+const KaarigarOriginal = () => {
+
+
+  return (
+    <section className="relative overflow-hidden min-h-screen bg-black py-20 px-6 md:px-16">
+      
+      {/* Blurred background image */}
+      <div className="absolute inset-0">
+        <img src={bgImg} alt="Background" className="w-full h-full object-cover opacity-30 blur-sm" />
+        <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-black/30 to-black/80" />
+      </div>
+
+      {/* Heading */}
+      <div className="relative z-10 text-center mb-20">
+        <motion.h2
+          initial={{ opacity: 0, y: -50 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 1, ease: "easeOut" }}
+          viewport={{ once: true }}
+          className="text-5xl md:text-7xl font-[Amita] text-white leading-tight tracking-wider"
+        >
+          <span className="block w-20 h-1 mx-auto mb-6 bg-gradient-to-r from-teal-400 via-teal-200 to-teal-400 rounded-full"></span>
+          Kaarigar Original
+        </motion.h2>
+        <motion.p
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
+          transition={{ delay: 0.3, duration: 1 }}
+          viewport={{ once: true }}
+          className="text-gray-300 mt-6 text-lg md:text-2xl font-light"
+        >
+          Explore the authentic soul of art, handwoven by our finest creators.
+        </motion.p>
+      </div>
+
+      {/* Products Grid */}
+      <div className="relative z-10 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-14">
+        {originals.map((product, index) => (
+          <motion.div
+            key={product.id}
+            variants={fadeInUp}
+            initial="hidden"
+            whileInView="show"
+            viewport={{ once: true }}
+            transition={{ delay: index * 0.3 }}
+          >
+            <TiltCard>
+              <a
+                href={product.link}
+                className="group block bg-white/10 backdrop-blur-xl border border-white/20 rounded-3xl overflow-hidden hover:shadow-[0_0_30px_#00ffc3] transition-all duration-700 p-5"
+              >
+                <div className="overflow-hidden rounded-2xl">
+                  <motion.img
+                    src={product.image}
+                    alt={product.title}
+                    className="w-full h-72 object-cover group-hover:scale-110 transition-transform duration-700 ease-out"
+                    whileHover={{ scale: 1.1 }}
+                  />
+                </div>
+                <div className="p-4 text-center">
+                  <h3 className="text-xl font-[Amita] font-bold text-white mb-2">{product.title}</h3>
+                  <p className="text-teal-400 font-semibold text-lg">{product.price}</p>
+                  <p className="text-gray-400 text-xs mt-2 uppercase tracking-wide">Exclusive Originals</p>
+                </div>
+              </a>
+            </TiltCard>
+          </motion.div>
+        ))}
+      </div>
+
+      {/* Animated Divider */}
+      <motion.div
+        className="relative z-10 w-4/5 mx-auto mt-24 h-1 bg-gradient-to-r from-transparent via-white to-transparent rounded-full"
+        initial={{ width: 0 }}
+        whileInView={{ width: "80%" }}
+        viewport={{ once: true }}
+        transition={{ duration: 1.5 }}
+      />
+    </section>
+  );
+};
+
+export default KaarigarOriginal;
+
