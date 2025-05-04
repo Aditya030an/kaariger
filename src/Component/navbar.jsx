@@ -119,7 +119,7 @@
 import { useState } from 'react';
 import { FaHeart, FaSearch, FaShoppingCart, FaUser } from 'react-icons/fa';
 import logo from './photos/jua2.png'; // Replace with circular icon if needed
-import Jua from './photos/jua.jpg';
+import Jua from './photos/jua2.png';
 import Madira from './photos/madira1.png';
 import music from './photos/music.png';
 import cinema from './photos/cinema.jpg';
