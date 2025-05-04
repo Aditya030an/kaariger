@@ -6,7 +6,7 @@ import { motion } from "framer-motion";
 import VanillaTilt from "vanilla-tilt";
 import bgImg from "./photos/jua.jpg";
 import kaarigar1 from "./photos/jua.jpg";
-import kaarigar2 from "./photos/Jua1.png";
+import kaarigar2 from "./photos/jua2.png";
 import kaarigar3 from "./photos/jua2.png";
 import Img4 from "./photos/jua3.png";
 import Img5 from "./photos/jua4.png";
