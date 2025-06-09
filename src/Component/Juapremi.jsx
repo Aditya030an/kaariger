@@ -4,8 +4,8 @@
 import React ,{useState , useEffect} from "react";
 import { motion } from "framer-motion";
 import VanillaTilt from "vanilla-tilt";
-import bgImg from "./photos/jua.jpg";
-import kaarigar1 from "./photos/jua.jpg";
+import bgImg from "./photos/Jua.jpg";
+import kaarigar1 from "./photos/Jua.jpg";
 import kaarigar2 from "./photos/jua2.png";
 import kaarigar3 from "./photos/jua2.png";
 import Img4 from "./photos/jua3.png";
