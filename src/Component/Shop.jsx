@@ -335,7 +335,7 @@ import cp11 from "./photos/Cinema10.jpeg";
 
 // Jua Products
 import jp1 from "./photos/jua.jpg";
-import jp2 from "./photos/Jua1.png";
+import jp2 from "./photos/jua2.png";
 import jp3 from "./photos/jua2.png";
 import jp4 from "./photos/jua3.png";
 import jp5 from "./photos/jua4.png";

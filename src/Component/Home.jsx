@@ -202,8 +202,7 @@ import carsoul from "./photos/slide.png";
 import carsoul1 from "./photos/slide3.jpeg";
 import carsoul2 from "./photos/slide2.png";
 import madira1 from "./photos/madira2.png";
-import jua from "../Component/photos/Jua1.png";
-
+import jua from "./photos/jua2.png";
 
 import cinema from "./photos/cinema.jpg";
 import music from "./photos/music.png";

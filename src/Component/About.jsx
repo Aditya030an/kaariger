@@ -4,7 +4,7 @@ import { useRef, useEffect } from "react";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 // import bg from "./photos/canvas.png"; // Optional background
-import jua from './photos/Jua1.png';
+import jua from './photos/jua2.png';
 import cinema from './photos/cinema.jpg';
 
 gsap.registerPlugin(ScrollTrigger);
