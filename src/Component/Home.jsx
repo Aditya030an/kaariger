@@ -1,7 +1,3 @@
-
-
-
-
 // import React, { useState, useEffect } from 'react';
 // import carsoul from './photos/slide.png';
 // import carsoul1 from './photos/slide6.png';
@@ -98,9 +94,6 @@
 //       </div>
 //       {/* <Slide></Slide> */}
 
-
-
-
 //       {/* Art Gallery */}
 //       {/* <div className="bg-[#fefefe] py-16 px-4 md:px-12">
 //         <div className="text-center mb-10">
@@ -184,9 +177,6 @@
 //   </div>
 // </div>
 
-
-
-
 //       <Bestseller />
 //       <Refresh />
 //       <About />
@@ -207,29 +197,23 @@
 
 // export default Home;
 
+import React, { useState, useEffect } from "react";
+import carsoul from "./photos/slide.png";
+import carsoul1 from "./photos/slide3.jpeg";
+import carsoul2 from "./photos/slide2.png";
+import madira1 from "./photos/madira2.png";
+import jua from "./photos/Jua1.png";
 
-
-
-
-
-
-import React, { useState, useEffect } from 'react';
-import carsoul from './photos/slide.png';
-import carsoul1 from './photos/slide3.jpeg';
-import carsoul2 from './photos/slide2.png';
-import madira1 from './photos/madira2.png';
-import jua from './photos/Jua1.png';
-
-import cinema from './photos/cinema.jpg';
-import music from './photos/music.png';
-import { FaWhatsapp } from 'react-icons/fa';
-import baklol from './photos/baklol.png';
-import bgImg from './photos/madira2.png';
-import Bestseller from './Bestseller';
+import cinema from "./photos/cinema.jpg";
+import music from "./photos/music.png";
+import { FaWhatsapp } from "react-icons/fa";
+import baklol from "./photos/baklol.png";
+import bgImg from "./photos/madira2.png";
+import Bestseller from "./Bestseller";
 import Refresh from "./Refresh";
 import About from "./About";
 import USP from "./USP";
-import brush from './photos/paint.png'; 
+import brush from "./photos/paint.png";
 import Landing from "./Landing";
 const images = [carsoul, carsoul1, carsoul2];
 
@@ -254,12 +238,14 @@ const Home = () => {
   }, []);
 
   const collections = [
-    { title: 'Madira Premi', image: madira1 },
-    { title: 'Jua Premi', image: jua },
-    { title: 'Aesthetic premi', image: cinema },
-    { title: 'Music premi', image: music },
-    { title: 'Baklol premi', image: baklol },
-    { title: 'Gaddi premi', image: madira1 },
+    { title: "Madira Premi"  ,  image: madira1, link: '/Madira' },
+    { title: "Jua Premi", image: jua , link: '/Juapremi' },
+    { title: "Aesthetic premi", image: cinema , link: '/Aestheticspremi' },
+    { title: "Music premi", image: music  , link: '/Pencilpremi'},
+    { title: "Baklol premi", image: baklol , link: '/Cinemapremi' },
+    { title: "Gaddi premi", image: madira1  , link: "/Gaadi" },
+
+
   ];
 
   return (
@@ -272,42 +258,39 @@ const Home = () => {
         style={{
           left: `${cursorPos.x}px`,
           top: `${cursorPos.y}px`,
-          transform: 'translate(-50%, -50%)',
+          transform: "translate(-50%, -50%)",
         }}
       />
 
       {/* Carousel */}
       <div className="relative w-full h-[85vh] overflow-hidden">
-  <div
-    className="flex transition-transform duration-700 ease-in-out h-full"
-    style={{ transform: `translateX(-${currentIndex * 100}%)` }}
-  >
-    {images.map((src, index) => (
-      <div key={index} className="w-full h-full flex-none">
-        <img
-          src={src}
-          alt={`slide-${index}`}
-          className="w-full h-full object-cover"
-        />
+        <div
+          className="flex transition-transform duration-700 ease-in-out h-full"
+          style={{ transform: `translateX(-${currentIndex * 100}%)` }}
+        >
+          {images.map((src, index) => (
+            <div key={index} className="w-full h-full flex-none">
+              <img
+                src={src}
+                alt={`slide-${index}`}
+                className="w-full h-full object-cover"
+              />
+            </div>
+          ))}
+        </div>
+
+        <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2 flex space-x-3 z-10">
+          {images.map((_, index) => (
+            <div
+              key={index}
+              className={`w-3 h-3 rounded-full cursor-pointer transition-colors duration-300 ${
+                index === currentIndex ? "bg-white" : "bg-gray-500"
+              }`}
+              onClick={() => setCurrentIndex(index)}
+            />
+          ))}
+        </div>
       </div>
-    ))}
-  </div>
-
-  <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2 flex space-x-3 z-10">
-    {images.map((_, index) => (
-      <div
-        key={index}
-        className={`w-3 h-3 rounded-full cursor-pointer transition-colors duration-300 ${
-          index === currentIndex ? 'bg-white' : 'bg-gray-500'
-        }`}
-        onClick={() => setCurrentIndex(index)}
-      />
-    ))}
-  </div>
-</div>
-    
-
-      
 
       {/* Art Gallery */}
       <div className="bg-[#fefefe] py-16 px-4 md:px-12">
@@ -339,17 +322,16 @@ const Home = () => {
                 {item.title}
               </h3>
               <div className="text-center mt-2">
-  <a href="/your-link" className="inline-block">
-    <button className="group relative inline-flex items-center justify-center px-6 py-2 font-[Amita] text-gray-800 border border-gray-800 rounded-full overflow-hidden transition-all duration-300 hover:text-white">
-      {/* Animated background fill */}
-      <span className="absolute inset-0 w-full h-full bg-gray-800 transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left"></span>
+                <a href={item?.link} className="inline-block">
+                  <button className="group relative inline-flex items-center justify-center px-6 py-2 font-[Amita] text-gray-800 border border-gray-800 rounded-full overflow-hidden transition-all duration-300 hover:text-white">
+                    {/* Animated background fill */}
+                    <span className="absolute inset-0 w-full h-full bg-gray-800 transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left"></span>
 
-      {/* Button text */}
-      <span className="relative z-10">EXPLORE</span>
-    </button>
-  </a>
-</div>
-
+                    {/* Button text */}
+                    <span className="relative z-10">EXPLORE</span>
+                  </button>
+                </a>
+              </div>
             </div>
           ))}
         </div>
