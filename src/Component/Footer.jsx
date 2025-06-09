@@ -1,7 +1,7 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { FaInstagram, FaFacebookF, FaTwitter, FaDribbble } from 'react-icons/fa';
-import logo from './photos/Logo.jpeg'; // Replace with your logo path
+import logo from './photos/logo.jpeg'; // Replace with your logo path
 
 const Footer = () => {
   return (
