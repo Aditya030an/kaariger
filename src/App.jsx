@@ -23,7 +23,7 @@ import Slide from "./Component/Slide.jsx"
 import Contact from './Component/Contact.jsx';
 import Cinemapremi from "./Component/Cinemapremi.jsx"
 import Pencilpremi from "./Component/Pencilpremi.jsx"
-import Shop from "./Component/Shop.jsx"
+
 
 const App = () => {
   const [isLoading, setIsLoading] = useState(true);
@@ -70,7 +70,7 @@ const App = () => {
             <Route path="/Contact" element={<Contact />} />
             <Route path="/Pencilpremi" element={<Pencilpremi cart={cart} setCart={setCart}/>} />
             <Route path="/Cinemapremi" element={<Cinemapremi cart={cart} setCart={setCart}/>} />
-            <Route path="/Shop" element={<Shop cart={cart} setCart={setCart} />} />
+           
           </Routes>
           <Footer />
         </Router>

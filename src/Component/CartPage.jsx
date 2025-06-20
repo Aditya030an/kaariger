@@ -7,43 +7,54 @@ const CartPage = ({ cart, setCart }) => {
   console.log("card inside cartPage", cart);
 
   // Increase quantity
-  const increaseQty = (id , price,height,width, artType
-  ) => {
+  const increaseQty = (id, price, height, width, artType , media, selectedFrame) => {
     const updated = cart?.map((item) =>
-      item.id === id && item?.price === price && item?.height === height && item?.width === width && item?.artType === artType  ? { ...item, quantity: item?.quantity + 1 } : item
+      item.id === id &&
+      item?.price === price &&
+      item?.height === height &&
+      item?.width === width &&
+      item?.artType === artType &&
+      item?.media === media &&
+      item?.selectedFrame === selectedFrame
+        ? { ...item, quantity: item?.quantity + 1 }
+        : item
     );
     setCart(updated);
   };
 
   // Decrease quantity
-  const decreaseQty = (id, price, height, width, artType) => {
+  const decreaseQty = (id, price, height, width, artType, media, selectedFrame) => {
     const updated = cart
       ?.map((item) =>
-        item.id === id && item?.price === price && item?.height === height && item?.width === width && item?.artType === artType ? { ...item, quantity: item?.quantity - 1 } : item
+        item.id === id &&
+        item?.price === price &&
+        item?.height === height &&
+        item?.width === width &&
+        item?.artType === artType &&
+        item?.media === media &&
+        item?.selectedFrame === selectedFrame
+          ? { ...item, quantity: item?.quantity - 1 }
+          : item
       )
       .filter((item) => item?.quantity > 0);
     setCart(updated);
   };
 
   // Remove item
-  const removeItem = (id) => {
-    const updated = cart?.filter((item) => item.id !== id);
+  const removeItem = (id , price, height, width, artType, media, selectedFrame) => {
+    const updated = cart?.filter(
+      (item) =>
+        item.id !== id &&
+        item?.price !== price &&
+        item?.height !== height &&
+        item?.width !== width &&
+        item?.artType !== artType &&
+        item?.media !== media &&
+        item?.selectedFrame !== selectedFrame
+    );
     setCart(updated);
   };
 
-  // Calculate total price
-  const getTotal = () => {
-    return cart?.reduce((total, item) => {
-      const price =
-        typeof item?.price === "string"
-          ? parseInt(item?.price?.replace("₹", "")?.trim())
-          : item?.price;
-
-      return total + price * item?.quantity;
-    }, 0);
-  };
-
-  // console.log("CArt", cart);
 
   return (
     <div className="min-h-screen bg-gray-100 p-6">
@@ -54,7 +65,7 @@ const CartPage = ({ cart, setCart }) => {
       ) : (
         <>
           <div className="grid gap-4">
-            {cart.map((item, index) => (
+            {cart?.map((item, index) => (
               <div
                 key={index}
                 className="bg-white p-4 rounded-lg shadow flex flex-col md:flex-row items-center justify-between"
@@ -67,10 +78,14 @@ const CartPage = ({ cart, setCart }) => {
                   />
                   <div>
                     <h2 className="text-lg font-semibold">{item?.title}</h2>
-                    <p className="text-gray-700 text-sm">
+                    <p className="text-gray-700 text-sm capitalize">
                       Size: {item?.width}" x {item?.height}" | Type:{" "}
                       {item?.artType}
                     </p>
+                    <p className="text-gray-700 text-sm capitalize">
+                      Media: {item?.media} | Frame: {item?.selectedFrame}
+                    </p>
+
                     <p className="text-sm text-gray-500">
                       Base Price: ₹{item?.basePrice?.toLocaleString()}
                     </p>
@@ -79,14 +94,34 @@ const CartPage = ({ cart, setCart }) => {
                     </p>
                     <div className="flex items-center mt-2 gap-2">
                       <button
-                        onClick={() => decreaseQty(item?.id, item?.price, item?.height, item?.width, item?.artType)}
+                        onClick={() =>
+                          decreaseQty(
+                            item?.id,
+                            item?.price,
+                            item?.height,
+                            item?.width,
+                            item?.artType , 
+                            item?.media,
+                            item?.selectedFrame
+                          )
+                        }
                         className="px-2 py-1 bg-gray-200 rounded hover:bg-gray-300"
                       >
                         -
                       </button>
                       <span>{item?.quantity}</span>
                       <button
-                        onClick={() => increaseQty(item?.id , item?.price , item?.height , item?.width , item?.artType)}
+                        onClick={() =>
+                          increaseQty(
+                            item?.id,
+                            item?.price,
+                            item?.height,
+                            item?.width,
+                            item?.artType ,
+                            item?.media,
+                            item?.selectedFrame
+                          )
+                        }
                         className="px-2 py-1 bg-gray-200 rounded hover:bg-gray-300"
                       >
                         +
@@ -98,7 +133,17 @@ const CartPage = ({ cart, setCart }) => {
                   </div>
                 </div>
                 <button
-                  onClick={() => removeItem(item.id)}
+                  onClick={() =>
+                    removeItem(
+                      item.id,
+                      item.price,
+                      item.height,
+                      item.width,
+                      item.artType,
+                      item.media,
+                      item.selectedFrame
+                    )
+                  }
                   className="mt-4 md:mt-0 bg-red-500 text-white px-3 py-1 rounded hover:bg-red-600"
                 >
                   Remove

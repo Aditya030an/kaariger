@@ -1,4 +1,4 @@
-import React, {useState , useEffect} from "react";
+import React, { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import VanillaTilt from "vanilla-tilt";
 import bgImg from "./photos/Cinema2.jpeg";
@@ -13,6 +13,8 @@ import Img8 from "./photos/Cinema7.jpeg";
 import Img9 from "./photos/Cinema8.jpeg";
 import Img10 from "./photos/Cinema9.jpeg";
 import Img11 from "./photos/Cinema10.jpeg";
+
+import ProductCart from "./ProductCard";
 
 // TiltCard component
 function TiltCard({ children }) {
@@ -37,88 +39,81 @@ function TiltCard({ children }) {
   );
 }
 
-// --- Price rates per inch²
-const pricingPerInch = {
-  handpainted: 45,
-  poster: 10,
-  aaPoster: 18,
-};
-
 const originals = [
   {
     id: 1,
     title: "Handcrafted Dreams | Original Artwork",
-    basePrice:  7999,
+    basePrice: 7999,
     image: kaarigar1,
     link: "#",
   },
   {
     id: 2,
     title: "Soulful Symphony | Canvas Masterpiece",
-    basePrice:  6499,
+    basePrice: 6499,
     image: kaarigar2,
     link: "#",
   },
   {
     id: 3,
     title: "Mystic Reflections | Paper Original",
-    basePrice:  7299,
+    basePrice: 7299,
     image: kaarigar3,
     link: "#",
   },
   {
     id: 4,
     title: "Twilight Reverie | Exclusive Paper",
-    basePrice:  7399,
+    basePrice: 7399,
     image: Img4,
     link: "#",
   },
   {
     id: 5,
     title: "Golden Horizon | Limited Series",
-    basePrice:  8599,
+    basePrice: 8599,
     image: Img5,
     link: "#",
   },
   {
     id: 6,
     title: "Twilight Reverie | Exclusive Paper",
-    basePrice:  7399,
+    basePrice: 7399,
     image: Img6,
     link: "#",
   },
   {
     id: 7,
     title: "Golden Horizon | Limited Series",
-    basePrice:  8599,
+    basePrice: 8599,
     image: Img7,
     link: "#",
   },
   {
     id: 8,
     title: "Crimson Threads | Canvas Abstract",
-    basePrice:  7999,
+    basePrice: 7999,
     image: Img8,
     link: "#",
   },
   {
     id: 9,
     title: "Ethereal Touch | Fine Original",
-    basePrice:  7499,
+    basePrice: 7499,
     image: Img9,
     link: "#",
   },
   {
     id: 10,
     title: "Twilight Reverie | Exclusive Paper",
-    basePrice:  7399,
+    basePrice: 7399,
     image: Img10,
     link: "#",
   },
   {
     id: 11,
     title: "Golden Horizon | Limited Series",
-    basePrice:  8599,
+    basePrice: 8599,
     image: Img11,
     link: "#",
   },
@@ -129,118 +124,31 @@ const fadeInUp = {
   show: { opacity: 1, y: 0, transition: { duration: 0.8, ease: "easeOut" } },
 };
 
-const ProductModal = ({ product, onClose, onAddToCart }) => {
-  const [width, setWidth] = useState(48);
-  const [height, setHeight] = useState(36);
-  const [artType, setArtType] = useState("handpainted");
-  const [price, setPrice] = useState(0);
+const Cinemapremi = ({ cart, setCart }) => {
+  const [selectedProduct, setSelectedProduct] = useState(null);
 
-  useEffect(() => {
-    const area = width * height;
-    const rate = pricingPerInch[artType];
-    setPrice(area * rate);
-  }, [width, height, artType]);
-
-  const handleAdd = () => {
-    const cartItem = {
-      ...product,
-      width,
-      height,
-      artType,
-      price,
-    };
-    onAddToCart(cartItem);
-    onClose();
+  const handleAddToCart = (product) => {
+    const existing = cart.find(
+      (item) =>
+        item.id === product?.id &&
+        item.artType === product?.artType &&
+        item.basePrice === product?.basePrice &&
+        item.price === product?.price &&
+        item.image === product?.image &&
+        item.width === product?.width &&
+        item.height === product?.height  &&
+        item.media === product?.media &&
+        item.selectedFrame === product?.selectedFrame
+    );
+    if (existing) {
+      const updated = cart.map((item) =>
+        item === existing ? { ...item, quantity: item.quantity + 1 } : item
+      );
+      setCart(updated);
+    } else {
+      setCart([...cart, { ...product, quantity: 1 }]);
+    }
   };
-
-  return (
-    <div className="fixed inset-0 bg-black bg-opacity-60 z-50 flex justify-center items-center">
-      <div className="bg-white p-6 rounded-lg shadow-lg w-full max-w-lg">
-        <button
-          onClick={onClose}
-          className="float-right text-xl font-bold text-gray-500"
-        >
-          ✖
-        </button>
-        <img
-          src={product?.image}
-          alt={product?.title}
-          className="w-full h-64 object-contain mb-4 rounded"
-        />
-        <h2 className="text-2xl font-bold mb-2">{product?.title}</h2>
-
-        <div className="mb-2">
-          <label className="block mb-1">
-            Enter Width & Height (in inches):
-          </label>
-          <div className="flex gap-2">
-            <input
-              type="number"
-              value={width}
-              onChange={(e) => setWidth(+e.target.value)}
-              className="border px-2 py-1 w-20 rounded"
-            />
-            <span>X</span>
-            <input
-              type="number"
-              value={height}
-              onChange={(e) => setHeight(+e.target.value)}
-              className="border px-2 py-1 w-20 rounded"
-            />
-          </div>
-        </div>
-
-        <div className="mb-3">
-          <label className="block mb-1">Select Art Type:</label>
-          <select
-            value={artType}
-            onChange={(e) => setArtType(e.target.value)}
-            className="border px-2 py-1 w-full rounded"
-          >
-            <option value="handpainted">Handpainted (₹45/inch²)</option>
-            <option value="poster">Poster (₹10/inch²)</option>
-            <option value="aaPoster">AA Poster (₹18/inch²)</option>
-          </select>
-        </div>
-
-        <p className="text-lg font-semibold mb-4 text-pink-600">
-          Updated Price: ₹{price.toLocaleString()}
-        </p>
-
-        <button
-          onClick={handleAdd}
-          className="w-full bg-pink-600 text-white py-2 rounded hover:bg-pink-700"
-        >
-          Add to Cart
-        </button>
-      </div>
-    </div>
-  );
-};
-
-const Cinemapremi = ({cart , setCart}) => {
-    const [selectedProduct, setSelectedProduct] = useState(null);
-    
-      const handleAddToCart = (product) => {
-        const existing = cart.find(
-          (item) =>
-            item.id === product?.id &&
-            item.artType === product?.artType &&
-            item.basePrice === product?.basePrice &&
-            item.price === product?.price &&
-            item.image === product?.image &&
-            item.width === product?.width &&
-            item.height === product?.height
-        );
-        if (existing) {
-          const updated = cart.map((item) =>
-            item === existing ? { ...item, quantity: item.quantity + 1 } : item
-          );
-          setCart(updated);
-        } else {
-          setCart([...cart, { ...product, quantity: 1 }]);
-        }
-      };
   return (
     <section className="relative overflow-hidden min-h-screen bg-white py-20 px-6 md:px-16">
       {/* Background Image */}
@@ -289,7 +197,7 @@ const Cinemapremi = ({cart , setCart}) => {
           >
             <TiltCard>
               <a
-               onClick={() => setSelectedProduct(product)}
+                onClick={() => setSelectedProduct(product)}
                 href={product?.link}
                 className="block bg-white shadow-lg border border-gray-200 rounded-3xl overflow-hidden hover:shadow-[0_0_30px_#38b2ac] transition-all duration-700 p-5"
               >
@@ -327,7 +235,7 @@ const Cinemapremi = ({cart , setCart}) => {
       />
       {/* Product Modal */}
       {selectedProduct && (
-        <ProductModal
+        <ProductCart
           product={selectedProduct}
           onClose={() => setSelectedProduct(null)}
           onAddToCart={handleAddToCart}
