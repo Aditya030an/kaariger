@@ -26,7 +26,7 @@ const categories = [
   { name: "Cinema Premi", image: cinema, link: "/Cinemapremi" },
   { name: "Aesthetics premi", image: baklol, link: "/Aestheticspremi" },
   { name: "Pencil Poetry", image: Jua, link: "/Pencilpremi" },
-  { name: "Kaarigar Luxe", image: Jua, link: "/Pencilpremi" },
+  
 ];
 
 const Navbar = ({cart}) => {
@@ -153,10 +153,13 @@ const Navbar = ({cart}) => {
             <a href="/Original" className="cursor-pointer hover:underline">
               Kaarigar Original
             </a>
-          
-            <a href="/Journey" className="cursor-pointer hover:underline">
-              The Journey
+            <a href="/Kaarigarluxe" className="cursor-pointer hover:underline">
+              Kaarigar Luxe
             </a>
+          
+            {/* <a href="/Journey" className="cursor-pointer hover:underline">
+              The Journey
+            </a> */}
             <a href="/Contact" className="cursor-pointer hover:underline">
               CONTACT
             </a>

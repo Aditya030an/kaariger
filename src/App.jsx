@@ -18,12 +18,12 @@ import Cursor from './Component/Cursor.jsx';
 import Juapremi from "./Component/Juapremi.jsx"
 import Madira from './Component/Madira.jsx';
 import Aestheticspremi from "./Component/Aestheticspremi.jsx"
-import Journey from "./Component/Journey.jsx"
+// import Journey from "./Component/Journey.jsx"
 import Slide from "./Component/Slide.jsx"
 import Contact from './Component/Contact.jsx';
 import Cinemapremi from "./Component/Cinemapremi.jsx"
 import Pencilpremi from "./Component/Pencilpremi.jsx"
-
+import Kaarigarluxe from './Component/Kaarigarluxe.jsx';
 
 const App = () => {
   const [isLoading, setIsLoading] = useState(true);
@@ -65,12 +65,12 @@ const App = () => {
             <Route path="/Juapremi" element={<Juapremi cart={cart} setCart={setCart}/>} />
             <Route path="/Madira" element={<Madira cart={cart} setCart={setCart}/>} />
             <Route path="/Aestheticspremi" element={<Aestheticspremi cart={cart} setCart={setCart}/>} />
-            <Route path="/Journey" element={<Journey />} />
+            {/* <Route path="/Journey" element={<Journey />} /> */}
             <Route path="/Slide" element={<Slide />} />
             <Route path="/Contact" element={<Contact />} />
             <Route path="/Pencilpremi" element={<Pencilpremi cart={cart} setCart={setCart}/>} />
             <Route path="/Cinemapremi" element={<Cinemapremi cart={cart} setCart={setCart}/>} />
-           
+            <Route path="/Kaarigarluxe" element={<Kaarigarluxe cart={cart} setCart={setCart}/>} />
           </Routes>
           <Footer />
         </Router>
